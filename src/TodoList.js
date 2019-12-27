@@ -1,13 +1,17 @@
 import React from "react";
+import List from "@material-ui/core/List";
+import TodoForm from "./TodoForm";
+
 import Todo from "./Todo";
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, handleSave, handleDelete }) => {
   return (
-    <div>
+    <List>
+      <TodoForm handleSave={handleSave} />
       {todos.map(todo => (
-        <Todo key={todo.id} {...todo} />
+        <Todo key={todo.id} {...todo} handleDelete={handleDelete} />
       ))}
-    </div>
+    </List>
   );
 };
 
