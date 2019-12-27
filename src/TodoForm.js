@@ -1,15 +1,22 @@
 import React from "react";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import useInput from "./hooks/useInput";
 import uuid from "uuid/v4";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  root: {
+    padding: "0 1.5rem"
+  }
+});
 const TodoForm = ({ handleSave }) => {
-  const [fieldsTodo, resetTodo] = useInput("", "New Todo");
+  const classes = useStyles();
+  const [fieldsTodo, resetTodo] = useInput("", "Add New Todo");
 
-  const handleClick = () => {
+  const handleSubmit = e => {
+    e.preventDefault();
     const newTodo = {
       id: uuid(),
       task: fieldsTodo.value,
@@ -20,10 +27,11 @@ const TodoForm = ({ handleSave }) => {
   };
   return (
     <>
-      <ListItem>
-        <TextField {...fieldsTodo} />
-        <Button onClick={handleClick}>save</Button>
-      </ListItem>
+      <Paper className={classes.root}>
+        <form onSubmit={handleSubmit}>
+          <TextField fullWidth {...fieldsTodo} margin="normal" />
+        </form>
+      </Paper>
       <Divider />
     </>
   );

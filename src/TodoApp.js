@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 import TodoList from "./TodoList";
 
@@ -48,11 +49,15 @@ const TodoApp = () => {
           <Typography variant="h5">React Hooks Todo App</Typography>
         </ToolBar>
       </AppBar>
-      <TodoList
-        todos={todos}
-        handleSave={handleSave}
-        handleDelete={handleDelete}
-      />
+      <Grid container justify="center">
+        <Grid item xs={11} sm={9} md={7} lg={5}>
+          <TodoList
+            todos={todos}
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+          />
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
