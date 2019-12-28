@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default (initValue, label) => {
+export default initValue => {
   const [value, setValue] = useState(initValue);
 
   const onChange = e => {
@@ -11,5 +11,5 @@ export default (initValue, label) => {
     setValue("");
   };
 
-  return [{ label, value, onChange }, reset];
+  return [{ value, onChange }, reset];
 };

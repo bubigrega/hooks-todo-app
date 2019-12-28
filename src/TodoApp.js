@@ -34,12 +34,23 @@ const TodoApp = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleSave = newTodo => {
-    setTodos([...todos, newTodo]);
+  const addTodo = task => {
+    console.log(task);
+    setTodos([...todos, { id: uuid(), task, completed: false }]);
   };
 
-  const handleDelete = id => {
+  const deleteTodo = id => {
     setTodos(todos.filter(t => t.id !== id));
+  };
+
+  const toggleCompleted = id => {
+    setTodos(
+      todos.map(t => (t.id === id ? { ...t, completed: !t.completed } : t))
+    );
+  };
+
+  const editTodo = (id, task) => {
+    setTodos(todos.map(t => (t.id === id ? { ...t, task } : t)));
   };
 
   return (
@@ -50,11 +61,13 @@ const TodoApp = () => {
         </ToolBar>
       </AppBar>
       <Grid container justify="center">
-        <Grid item xs={11} sm={9} md={7} lg={5}>
+        <Grid item xs={12} sm={10} md={8} lg={6}>
           <TodoList
             todos={todos}
-            handleSave={handleSave}
-            handleDelete={handleDelete}
+            addTodo={addTodo}
+            deleteTodo={deleteTodo}
+            toggleCompleted={toggleCompleted}
+            editTodo={editTodo}
           />
         </Grid>
       </Grid>
