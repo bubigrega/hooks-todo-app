@@ -61,7 +61,7 @@ const TodoApp = () => {
         </ToolBar>
       </AppBar>
       <Grid container justify="center">
-        <Grid item xs={12} sm={10} md={8} lg={6}>
+        <Grid item xs={11} sm={9} md={7} lg={5}>
           <TodoList
             todos={todos}
             addTodo={addTodo}

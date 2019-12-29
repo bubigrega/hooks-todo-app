@@ -7,7 +7,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
 
-import TodoForm from "./TodoForm";
+import EditTodoForm from "./EditTodoForm";
 import useToggle from "./hooks/useToggle";
 
 const Todo = ({
@@ -28,9 +28,9 @@ const Todo = ({
   };
 
   return (
-    <>
+    <ListItem style={{ height: "64px" }}>
       {editOpen ? (
-        <TodoForm
+        <EditTodoForm
           task={task}
           id={id}
           editTodo={editTodo}
@@ -38,7 +38,7 @@ const Todo = ({
           editOpen={editOpen}
         />
       ) : (
-        <ListItem>
+        <>
           <CheckBox checked={completed} onChange={handleCompleted} />
           <ListItemText
             style={{ textDecoration: completed ? "line-through" : "none" }}
@@ -55,9 +55,9 @@ const Todo = ({
               </IconButton>
             )}
           </ListItemSecondaryAction>
-        </ListItem>
+        </>
       )}
-    </>
+    </ListItem>
   );
 };
 
