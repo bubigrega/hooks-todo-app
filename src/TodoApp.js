@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 import TodoList from "./TodoList";
-import useTodoStorage from "./hooks/useTodoStorage";
+import useTodoState from "./hooks/useTodoState";
 import useStyles from "./hooks/useStyles";
 
 const styles = {
@@ -34,7 +34,7 @@ const TodoApp = () => {
     addTodo,
     deleteTodo,
     editTodo
-  } = useTodoStorage(initialTodos);
+  } = useTodoState(initialTodos);
 
   return (
     <Paper className={classes.paper}>
