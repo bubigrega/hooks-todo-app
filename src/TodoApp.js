@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import uuid from "uuid/v4";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
@@ -8,50 +7,34 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 import TodoList from "./TodoList";
+import useTodoStorage from "./hooks/useTodoStorage";
+import useStyles from "./hooks/useStyles";
 
-const useStyles = makeStyles({
+const styles = {
   paper: {
-    height: "100vh"
+    minHeight: "100vh"
   },
   appbar: {
     height: "64px"
   }
-});
+};
 
 const initialTodos = [
   { id: uuid(), task: "clean kitchen", completed: true },
   { id: uuid(), task: "clean living room", completed: true },
-  { id: uuid(), task: "clean beadroom", completed: true }
+  { id: uuid(), task: "clean beadroom", completed: false }
 ];
 
 const TodoApp = () => {
-  const classes = useStyles();
-  const [todos, setTodos] = useState(
-    () => JSON.parse(localStorage.getItem("todos")) || initialTodos
-  );
+  const classes = useStyles(styles);
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  const addTodo = task => {
-    console.log(task);
-    setTodos([...todos, { id: uuid(), task, completed: false }]);
-  };
-
-  const deleteTodo = id => {
-    setTodos(todos.filter(t => t.id !== id));
-  };
-
-  const toggleCompleted = id => {
-    setTodos(
-      todos.map(t => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
-  };
-
-  const editTodo = (id, task) => {
-    setTodos(todos.map(t => (t.id === id ? { ...t, task } : t)));
-  };
+  const {
+    todos,
+    toggleCompleted,
+    addTodo,
+    deleteTodo,
+    editTodo
+  } = useTodoStorage(initialTodos);
 
   return (
     <Paper className={classes.paper}>

@@ -1,7 +1,8 @@
 import React from "react";
 import List from "@material-ui/core/List";
-import TodoForm from "./TodoForm";
 import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
+import TodoForm from "./TodoForm";
 
 import Todo from "./Todo";
 
@@ -12,22 +13,30 @@ const TodoList = ({
   toggleCompleted,
   editTodo
 }) => {
+  const todosLength = todos.length;
   return (
-    <Paper>
+    <>
       <TodoForm addTodo={addTodo} />
-      <List>
-        {todos.map(todo => (
-          <Todo
-            key={todo.id}
-            {...todo}
-            deleteTodo={deleteTodo}
-            toggleCompleted={toggleCompleted}
-            addTodo={addTodo}
-            editTodo={editTodo}
-          />
-        ))}
-      </List>
-    </Paper>
+      {todos.length ? (
+        <Paper>
+          <List>
+            {todos.map((todo, index) => (
+              <React.Fragment key={todo.id}>
+                <Todo
+                  key={todo.id}
+                  {...todo}
+                  deleteTodo={deleteTodo}
+                  toggleCompleted={toggleCompleted}
+                  addTodo={addTodo}
+                  editTodo={editTodo}
+                />
+                {todosLength !== index + 1 && <Divider />}
+              </React.Fragment>
+            ))}
+          </List>
+        </Paper>
+      ) : null}
+    </>
   );
 };
 
