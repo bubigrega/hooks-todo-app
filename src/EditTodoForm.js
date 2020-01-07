@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
 import useInput from "./hooks/useInput";
+import { TodoStateContext } from "./contexts/todo-context";
 
 const useStyles = makeStyles({
   root: {
@@ -11,15 +12,19 @@ const useStyles = makeStyles({
   }
 });
 
-const EditTodoForm = ({ id, task, setEditOpen, editTodo }) => {
+const EditTodoForm = ({ id, task, setEditOpen }) => {
   const classes = useStyles();
+
   const [fieldsTodo] = useInput(task);
+
+  const { editTodo } = useContext(TodoStateContext);
 
   const handleSubmit = e => {
     e.preventDefault();
     editTodo(id, fieldsTodo.value);
     setEditOpen();
   };
+
   return (
     <form onSubmit={handleSubmit} className={classes.root}>
       <TextField

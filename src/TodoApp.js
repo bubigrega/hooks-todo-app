@@ -1,5 +1,4 @@
 import React from "react";
-import uuid from "uuid/v4";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
@@ -7,8 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 import TodoList from "./TodoList";
-import useTodoState from "./hooks/useTodoState";
 import useStyles from "./hooks/useStyles";
+import { TodoStateProvider } from "./contexts/todo-context";
 
 const styles = {
   paper: {
@@ -19,22 +18,8 @@ const styles = {
   }
 };
 
-const initialTodos = [
-  { id: uuid(), task: "clean kitchen", completed: true },
-  { id: uuid(), task: "clean living room", completed: true },
-  { id: uuid(), task: "clean beadroom", completed: false }
-];
-
 const TodoApp = () => {
   const classes = useStyles(styles);
-
-  const {
-    todos,
-    toggleCompleted,
-    addTodo,
-    deleteTodo,
-    editTodo
-  } = useTodoState(initialTodos);
 
   return (
     <Paper className={classes.paper}>
@@ -45,13 +30,9 @@ const TodoApp = () => {
       </AppBar>
       <Grid container justify="center">
         <Grid item xs={11} sm={9} md={7} lg={5}>
-          <TodoList
-            todos={todos}
-            addTodo={addTodo}
-            deleteTodo={deleteTodo}
-            toggleCompleted={toggleCompleted}
-            editTodo={editTodo}
-          />
+          <TodoStateProvider>
+            <TodoList />
+          </TodoStateProvider>
         </Grid>
       </Grid>
     </Paper>

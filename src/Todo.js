@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,16 +9,12 @@ import Edit from "@material-ui/icons/Edit";
 
 import EditTodoForm from "./EditTodoForm";
 import useToggle from "./hooks/useToggle";
+import { TodoStateContext } from "./contexts/todo-context";
 
-const Todo = ({
-  task,
-  completed,
-  id,
-  deleteTodo,
-  toggleCompleted,
-  editTodo
-}) => {
+const Todo = ({ task, completed, id }) => {
   const [editOpen, setEditOpen] = useToggle(false);
+
+  const { deleteTodo, toggleCompleted } = useContext(TodoStateContext);
 
   const handleDelete = () => {
     deleteTodo(id);
@@ -33,7 +29,6 @@ const Todo = ({
         <EditTodoForm
           task={task}
           id={id}
-          editTodo={editTodo}
           setEditOpen={setEditOpen}
           editOpen={editOpen}
         />
