@@ -8,7 +8,7 @@ import React, {
 import uuid from "uuid/v4";
 // import { todoReducer } from "../reducers/todo.reducer";
 // import useTodoState from "../hooks/useTodoState";
-import { useTodoReducer } from "../hooks/useTodoReducer";
+import { useLocalStorageReducer } from "../hooks/useLocalStorageReducer";
 
 export const TodoStateContext = createContext();
 export const TodoDispatchContext = createContext();
@@ -23,7 +23,7 @@ export const TodoStateProvider = props => {
   // const todosStateAndMethods = useTodoState(initialTodos);
   // const [todos, dispatch] = useReducer(todoReducer, initialTodos);
 
-  const [todos, dispatch] = useTodoReducer(initialTodos);
+  const [todos, dispatch] = useLocalStorageReducer("todos", initialTodos);
 
   return (
     <TodoStateContext.Provider

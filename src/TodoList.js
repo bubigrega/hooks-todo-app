@@ -11,7 +11,6 @@ const TodoList = () => {
 
   const todosLength = todos.length;
 
-  console.log("render TODO LIST", todos);
   return (
     <>
       {todos.length ? (

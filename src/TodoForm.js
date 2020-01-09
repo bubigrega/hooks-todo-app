@@ -25,8 +25,6 @@ const TodoForm = () => {
     resetTodo();
   };
 
-  console.log("render FORM");
-
   return (
     <Paper className={classes.root}>
       <form onSubmit={handleSubmit}>

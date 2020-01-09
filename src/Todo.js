@@ -22,7 +22,6 @@ const Todo = ({ task, completed, id }) => {
   const handleCompleted = () => {
     dispatch({ type: "TOGGLECOMPLETE", id });
   };
-  console.log("render TODO");
   return (
     <ListItem style={{ height: "64px" }}>
       {editOpen ? (

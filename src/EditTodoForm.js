@@ -24,7 +24,6 @@ const EditTodoForm = ({ id, task, setEditOpen }) => {
     dispatch({ type: "EDIT", id, task: fieldsTodo.value });
     setEditOpen();
   };
-  console.log("render edit todo form");
   return (
     <form onSubmit={handleSubmit} className={classes.root}>
       <TextField
