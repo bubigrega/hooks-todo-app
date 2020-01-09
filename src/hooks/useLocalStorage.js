@@ -1,3 +1,5 @@
+// NOT USED AFTER REFACTOR WITH CUSTOM USETODOREDUCER
+
 import { useEffect, useState } from "react";
 
 export default (key, defaultValue) => {
