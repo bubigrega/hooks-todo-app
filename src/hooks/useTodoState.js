@@ -1,3 +1,5 @@
+// NOT USED AFTER REFACTOR WITH CONTEXT AND USEREDUCER STATE MANAGMENT
+
 import uuid from "uuid/v4";
 
 import useLocalStorage from "./useLocalStorage";

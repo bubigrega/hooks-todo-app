@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
 import useInput from "./hooks/useInput";
-import { TodoStateContext } from "./contexts/todo-context";
+import { TodoDispatchContext } from "./contexts/todo-context";
 
 const useStyles = makeStyles({
   root: {
@@ -17,14 +17,14 @@ const EditTodoForm = ({ id, task, setEditOpen }) => {
 
   const [fieldsTodo] = useInput(task);
 
-  const { editTodo } = useContext(TodoStateContext);
+  const dispatch = useContext(TodoDispatchContext);
 
   const handleSubmit = e => {
     e.preventDefault();
-    editTodo(id, fieldsTodo.value);
+    dispatch({ type: "EDIT", id, task: fieldsTodo.value });
     setEditOpen();
   };
-
+  console.log("render edit todo form");
   return (
     <form onSubmit={handleSubmit} className={classes.root}>
       <TextField

@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 import TodoList from "./TodoList";
+import TodoForm from "./TodoForm";
 import useStyles from "./hooks/useStyles";
 import { TodoStateProvider } from "./contexts/todo-context";
 
@@ -31,6 +32,7 @@ const TodoApp = () => {
       <Grid container justify="center">
         <Grid item xs={11} sm={9} md={7} lg={5}>
           <TodoStateProvider>
+            <TodoForm />
             <TodoList />
           </TodoStateProvider>
         </Grid>

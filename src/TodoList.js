@@ -2,18 +2,18 @@ import React, { useContext } from "react";
 import List from "@material-ui/core/List";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
-import TodoForm from "./TodoForm";
 
 import Todo from "./Todo";
 import { TodoStateContext } from "./contexts/todo-context";
 
 const TodoList = () => {
-  const { todos } = useContext(TodoStateContext);
+  const todos = useContext(TodoStateContext);
 
   const todosLength = todos.length;
+
+  console.log("render TODO LIST", todos);
   return (
     <>
-      <TodoForm />
       {todos.length ? (
         <Paper>
           <List>

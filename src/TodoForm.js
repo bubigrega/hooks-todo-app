@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import useInput from "./hooks/useInput";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import { TodoStateContext } from "./contexts/todo-context";
+import { TodoDispatchContext } from "./contexts/todo-context";
 
 const useStyles = makeStyles({
   root: {
@@ -12,18 +12,20 @@ const useStyles = makeStyles({
   }
 });
 const TodoForm = () => {
+  const dispatch = useContext(TodoDispatchContext);
+
   const classes = useStyles();
 
   const [fieldsTodo, resetTodo] = useInput("");
 
-  const { addTodo } = useContext(TodoStateContext);
-
   const handleSubmit = e => {
     e.preventDefault();
 
-    addTodo(fieldsTodo.value);
+    dispatch({ type: "ADD", task: fieldsTodo.value });
     resetTodo();
   };
+
+  console.log("render FORM");
 
   return (
     <Paper className={classes.root}>

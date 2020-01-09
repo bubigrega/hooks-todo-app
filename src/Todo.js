@@ -9,20 +9,20 @@ import Edit from "@material-ui/icons/Edit";
 
 import EditTodoForm from "./EditTodoForm";
 import useToggle from "./hooks/useToggle";
-import { TodoStateContext } from "./contexts/todo-context";
+import { TodoDispatchContext } from "./contexts/todo-context";
 
 const Todo = ({ task, completed, id }) => {
   const [editOpen, setEditOpen] = useToggle(false);
 
-  const { deleteTodo, toggleCompleted } = useContext(TodoStateContext);
+  const dispatch = useContext(TodoDispatchContext);
 
   const handleDelete = () => {
-    deleteTodo(id);
+    dispatch({ type: "DELETE", id });
   };
   const handleCompleted = () => {
-    toggleCompleted(id);
+    dispatch({ type: "TOGGLECOMPLETE", id });
   };
-
+  console.log("render TODO");
   return (
     <ListItem style={{ height: "64px" }}>
       {editOpen ? (
